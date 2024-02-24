@@ -2,7 +2,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import './cart.css'
 import { RootState } from '../../store/store';
 import { formatCurrency } from '../../utils/utils';
-import { removeItem } from '../../store/products/cartSlice';
+import { Cart, removeItem } from '../../store/products/cartSlice';
 import CardItem from './compoents/cardItem';
 
 function CartScreen() {
@@ -10,14 +10,14 @@ function CartScreen() {
     const dispatch = useDispatch()
     let total = 0
     items.forEach((prod) =>{
-        total += prod.price * prod.qty
+        total += prod.price * (prod.qty || 1)
     })
     const CartList = () => {
         return (
             <div className='cart-wrap'>
                 {
                     items.map((item) => (
-                        <CardItem  key={item.id} onDelete={(id) => dispatch(removeItem(id))} item={item}/>
+                        <CardItem  key={item.id} onDelete={(id) => dispatch(removeItem(id))} item={item as Cart}/>
                     ))
                 }
             </div>

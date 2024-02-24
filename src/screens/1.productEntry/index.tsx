@@ -8,6 +8,7 @@ import { addNewProduct, removeProduct } from '../../store/products/productsSlice
 import {v4 as uuidv4} from 'uuid';
 import { RootState } from '../../store/store';
 import CardItem from '../4.cart/compoents/cardItem';
+import { Cart } from '../../store/products/cartSlice';
 
 
 const categoriesList: Category[] = [
@@ -157,7 +158,7 @@ function ProductEntryScreen() {
       <br />
       {
         items.map((item) => (
-          <CardItem  key={item.id} onDelete={(id) => {dispatch(removeProduct(id))}} item={item} showQty={false}/>
+          <CardItem  key={item.id} onDelete={(id) => {dispatch(removeProduct(id))}} item={item as Cart} showQty={false}/>
         ))
       }
     </div>
