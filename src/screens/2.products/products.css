@@ -39,20 +39,20 @@
 }
 
 
-@media (max-width: 1410px) {
+@media (max-width: 1582px) {
     .items-wrap{
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media (max-width: 1102px) {
+@media (max-width: 1307px) {
     .items-wrap{
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 900px) {
+/* @media (max-width: 1038px) {
     .items-wrap{
         grid-template-columns: repeat(1, 1fr);
     }
-}
+} */

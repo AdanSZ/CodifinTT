@@ -1,10 +1,9 @@
 import { useDispatch, useSelector} from 'react-redux';
 import './cart.css'
 import { RootState } from '../../store/store';
-import { Button, Rate } from 'antd';
 import { formatCurrency } from '../../utils/utils';
-import { DeleteOutlined } from '@ant-design/icons';
 import { removeItem } from '../../store/products/cartSlice';
+import CardItem from './compoents/cardItem';
 
 function CartScreen() {
     const {items} = useSelector((state: RootState) => state.cart)
@@ -18,33 +17,7 @@ function CartScreen() {
             <div className='cart-wrap'>
                 {
                     items.map((item) => (
-                        <div key={item.id} className='cart-item'>
-                            <div className='cart-product-image' style={{backgroundImage: `url(${item.image})`}} />
-                                {/* <img src={item.image} alt="" /> */}
-                            <div style={{display: 'flex', justifyContent: 'space-between', flex: 1}}>
-                                <div className="cart-product-desc" style={{display: 'flex', flexDirection: 'column'}}>
-                                    <span className='txt-name'>{item.name}</span>
-                                    <span className='txt-price'>Price: {formatCurrency(item.price)}</span>
-                                    <Rate 
-                                        tooltips={['terrible', 'bad', 'normal', 'good', 'wonderful']} 
-                                        onChange={() => {}} 
-                                        value={3} 
-                                        />
-                                    <span className='txt-category'>Category: {item.category.value}</span>
-                                    <span>qty: {item.qty}</span>
-                                </div>
-                                <div>
-                                    
-                                    <Button type='primary' danger onClick={() => {
-                                        dispatch(removeItem(item.id))
-                                    }}>
-                                        <DeleteOutlined />
-                                    </Button>
-                                </div>
-                            </div>
-                        <div>
-                    </div>
-                </div>
+                        <CardItem  key={item.id} onDelete={(id) => dispatch(removeItem(id))} item={item}/>
                     ))
                 }
             </div>

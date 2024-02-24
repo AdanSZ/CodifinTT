@@ -172,7 +172,7 @@ form[action$="destroy"] button {
 }
 
 #sidebar {
-  width: 22rem;
+  width: 16rem;
   background-color: #f7f7f7;
   border-right: solid 1px #e3e3e3;
   display: flex;
@@ -448,4 +448,29 @@ i {
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.menuBtn{
+  display: none;
+}
+
+@media (max-width: 940px) {
+  #sidebar{
+    width: 100%; 
+  }
+  .menuBtn{
+    display: block;
+  }
+  #sidebar h1{
+    display: none;
+  }
+  #root{
+      flex-direction: column;
+  }
+  nav{
+    display: none;
+  }
+  .show-nav{
+    display: block;
+  }
 }

@@ -1,4 +1,4 @@
-import { Button, Form, InputNumber, Rate } from 'antd';
+import { Button, Form, InputNumber, Rate, message } from 'antd';
 import { Product } from '../../utils/types';
 import './productDetails.css'
 import { useLocation } from "react-router-dom";
@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 
 function ProductDetailsScreen() {
     const { state } = useLocation();
+    const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
     const product: Product = state.item
     const dispatch = useDispatch()
@@ -16,18 +17,25 @@ function ProductDetailsScreen() {
         const cartItem: Cart = {...product, qty: value}
         form.setFieldsValue({ qty: 1 });
         dispatch(addItemToCart(cartItem))
+        messageApi.open({
+            type: 'success',
+            content: `${value} ${product.name} added to cart`,
+          });
     }
     
     return (
         <div className='product-details'>
-            <h1>Product Details Screen</h1>
+            <h1>Product Details</h1>
+            {contextHolder}
             <div className={"product-details-container"} style={{display: 'grid'}}>
                 <div>
-                    <img src={product.image} alt="" />
+                    <img src={product.image} alt="" width="500" />
                 </div>
                 <div>
                     <h3>{product.name}</h3>
-                    <br />
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia doloribus, asperiores consequatur consectetur pariatur itaque hic delectus nam veniam soluta. Odio tenetur labore at amet, esse repellendus quod voluptatibus nostrum!
+                    </p>
                     <Rate 
                         tooltips={['terrible', 'bad', 'normal', 'good', 'wonderful']} 
                         onChange={() => {}} 

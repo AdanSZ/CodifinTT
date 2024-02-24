@@ -3,9 +3,12 @@ import './productEntry.css'
 import { Button, Form, Input, Select, Space, message, InputNumber } from 'antd';
 import { Category, Product } from '../../utils/types';
 import { getRandImg } from '../../utils/utils';
-import { useDispatch} from 'react-redux';
-import { addNewProduct } from '../../store/products/productsSlice';
+import { useDispatch, useSelector} from 'react-redux';
+import { addNewProduct, removeProduct } from '../../store/products/productsSlice';
 import {v4 as uuidv4} from 'uuid';
+import { RootState } from '../../store/store';
+import CardItem from '../4.cart/compoents/cardItem';
+
 
 const categoriesList: Category[] = [
   {
@@ -36,7 +39,7 @@ const categoriesList: Category[] = [
 
 function ProductEntryScreen() {
   const dispatch = useDispatch()
-
+  const {items} = useSelector((state: RootState) => state.products)
   const [isLoading, setIsLoading] = useState(false)
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
@@ -151,6 +154,12 @@ function ProductEntryScreen() {
         </Form.Item>
       </Form>
       </div>
+      <br />
+      {
+        items.map((item) => (
+          <CardItem  key={item.id} onDelete={(id) => {dispatch(removeProduct(id))}} item={item} showQty={false}/>
+        ))
+      }
     </div>
   )
 }
